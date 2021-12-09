@@ -1,0 +1,20 @@
+body{
+    background: #53adad;
+}
+
+
+
+.inp input{
+    border: 2px solid black;
+    font-size: 15px;
+    padding: 3px;
+    margin: 3px;
+
+}
+
+#sendbutton{
+    background-color: #e7e7e7; 
+    color: black;
+    font-size: 16px;
+    border-radius: 8px;
+}

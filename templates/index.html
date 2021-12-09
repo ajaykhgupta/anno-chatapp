@@ -1,0 +1,49 @@
+<html>
+
+<head>
+	<title>Chat Room</title>
+	<script src="https://cdn.socket.io/4.4.0/socket.io.min.js"
+		integrity="sha384-1fOn6VtTq3PWwfsOrk45LnYcGosJwzMHv+Xh/Jx5303FVOXzEnw0EpLv30mtjmlj"
+		crossorigin="anonymous"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+	<link rel="stylesheet" href="{{ url_for('static', filename = 'index.css') }}">
+</head>
+
+<body>
+	<script type="text/javascript">
+        name = (prompt("hello enter your name").toString())
+		$(document).ready(function () {			
+			var socket = io();
+			socket.on('connect', function () {
+				socket.send( 'User ' + name+' has Joined the chat!');
+			});
+
+			socket.on('message', function (msg,name) {
+				$("#messages").append( '<p>' + msg + '</p>');
+				console.log('Received message');
+			});
+
+			$('#sendbutton').on('click', function () {
+				socket.send(name +"::"+$('#myMessage').val());
+				$('#myMessage').val('');
+			});
+
+		});
+	</script>
+	<div>
+		<h1 style="text-align: center;">Anonymous Chat</h1>
+	</div>
+	<div style="text-align: center;">
+		<div id="messages"></div>
+		<div class="inp">
+			<input type="text" id="myMessage">
+		</div>
+        
+		<div>
+			<button id="sendbutton">Send</button>
+		</div>
+	</div>
+
+</body>
+
+</html>
